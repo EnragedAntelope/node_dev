@@ -6,6 +6,9 @@ from server import PromptServer
 
 from nodes import load_custom_node
 
+# Add this line
+NODE_CLASS_MAPPINGS = {}
+
 routes = PromptServer.instance.routes
 
 @routes.get("/node_dev/reload/{module_name}")
@@ -18,6 +21,4 @@ async def reload(request):
     # ensure the module is reloaded
     module = importlib.import_module(module_name)
     load_custom_node('custom_nodes/' + module_name)
-    return web.Response(text='OK') #headers={'Location': '/'})
-
-
+    return web.Response(text='OK')
